@@ -1,106 +1,98 @@
-# WezTerm Config
+# WezTerm + Zsh Config
 
-A clean WezTerm setup with Catppuccin Mocha theme and vim-style keybindings.
+A clean terminal setup with Catppuccin Mocha theme, vim-style keybindings, and Starship prompt.
 
-## Install
-
-### 1. Install WezTerm
+## Quick Install (macOS)
 
 ```bash
-# macOS (Homebrew)
-brew install --cask wezterm
+# Install everything
+brew install --cask wezterm font-jetbrains-mono-nerd-font
+brew install starship
 
-# Linux (Flatpak)
-flatpak install flathub org.wezfurlong.wezterm
+# Oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Or download from https://wezfurlong.org/wezterm/install/
-```
-
-### 2. Install the font
-
-```bash
-# macOS
-brew install --cask font-jetbrains-mono-nerd-font
-
-# Linux (most distros)
-# Download from https://www.nerdfonts.com/font-downloads
-# Extract to ~/.local/share/fonts/ then run: fc-cache -fv
-```
-
-### 3. Copy the config
-
-```bash
-# macOS
+# Copy configs
 cp wezterm.lua ~/.wezterm.lua
+mkdir -p ~/.config
+cp starship.toml ~/.config/starship.toml
 
-# Linux
-mkdir -p ~/.config/wezterm
-cp wezterm.lua ~/.config/wezterm/wezterm.lua
+# Add zshrc contents to your .zshrc (or replace it)
+cat zshrc >> ~/.zshrc
 ```
 
-### 4. Restart WezTerm
-
-Config reloads automatically, but restart to be safe.
+Restart your terminal.
 
 ---
 
-## Keybindings
+## What's Included
 
-### Splits (vim-style directions)
+| File | What it does |
+|------|--------------|
+| `wezterm.lua` | Terminal emulator config (theme, keybinds, opacity) |
+| `starship.toml` | Prompt config (git status, directory, time) |
+| `zshrc` | Shell config (oh-my-zsh, plugins, aliases) |
 
+---
+
+## WezTerm Keybindings
+
+### Splits
 | Action | Binding |
 |--------|---------|
-| Split left | `Cmd + h` |
-| Split down | `Cmd + j` |
-| Split up | `Cmd + k` |
-| Split right | `Cmd + l` |
+| Split left/down/up/right | `Cmd + h/j/k/l` |
 
-### Pane Navigation (vim-style)
-
+### Pane Navigation
 | Action | Binding |
 |--------|---------|
-| Move left | `Ctrl + h` |
-| Move down | `Ctrl + j` |
-| Move up | `Ctrl + k` |
-| Move right | `Ctrl + l` |
+| Move left/down/up/right | `Ctrl + h/j/k/l` |
 
 ### Pane Resize
-
 | Action | Binding |
 |--------|---------|
-| Resize left | `Cmd + Shift + h` |
-| Resize down | `Cmd + Shift + j` |
-| Resize up | `Cmd + Shift + k` |
-| Resize right | `Cmd + Shift + l` |
+| Resize left/down/up/right | `Cmd + Shift + h/j/k/l` |
 
-### Pane Management
-
+### Other
 | Action | Binding |
 |--------|---------|
 | Close pane | `Cmd + w` |
-| Zoom/unzoom (fullscreen toggle) | `Cmd + z` |
-
-### Zoom (Font Size)
-
-| Action | Binding |
-|--------|---------|
-| Zoom in | `Ctrl + =` |
-| Zoom out | `Ctrl + -` |
-| Reset zoom | `Ctrl + 0` |
+| Zoom toggle | `Cmd + z` |
+| Font size +/- | `Ctrl + =/-` |
+| Font size reset | `Ctrl + 0` |
 
 ---
 
-## Features
+## Optional Extras
 
-- **Catppuccin Mocha** color scheme
-- **Semi-transparent** window (0.925 opacity)
-- **Tab bar at bottom** with custom styling
-- **Dim inactive panes** for focus
-- **Vim-style** pane splits and navigation
-- **Status bar experiments** - uncomment options in the config to try different styles
+```bash
+# Better zsh plugins
+brew install zsh-autosuggestions zsh-syntax-highlighting
+
+# Then uncomment the lines in your .zshrc
+
+# Useful CLI tools
+brew install fzf ripgrep eza bat fd neovim
+```
 
 ---
 
-## Linux Note
+## Linux
 
-On Linux, replace `CMD` with `ALT` or `SUPER` in the keybindings section of `wezterm.lua` if needed.
+```bash
+# WezTerm
+flatpak install flathub org.wezfurlong.wezterm
+# or download from https://wezfurlong.org/wezterm/install/
+
+# Font: download JetBrainsMono Nerd Font from https://www.nerdfonts.com
+# Extract to ~/.local/share/fonts/ then: fc-cache -fv
+
+# Starship
+curl -sS https://starship.rs/install.sh | sh
+
+# Config locations
+mkdir -p ~/.config/wezterm
+cp wezterm.lua ~/.config/wezterm/wezterm.lua
+cp starship.toml ~/.config/starship.toml
+
+# Note: Change CMD to ALT in wezterm.lua keybindings
+```
